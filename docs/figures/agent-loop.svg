@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="AirScope模型决策与本地执行的ReAct回路"><title>AirScope ReAct tool calling architecture</title>
+<rect x="0" y="0" width="1280" height="720" rx="0" fill="#FFFEFA" stroke="none" stroke-width="0"/>
+<text x="66" y="92.89" font-family="PingFang SC" font-size="42" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="66" dy="0">模型决策与本地执行的 ReAct 回路</tspan></text>
+<rect x="68" y="128" width="66" height="4" rx="0" fill="#168574" stroke="none" stroke-width="0"/>
+<text x="68" y="172.49" font-family="PingFang SC" font-size="22" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="68" dy="0">工具请求与结果反馈构成闭环，数值计算始终由本地工具完成。</tspan></text>
+<text x="60" y="221.785" font-family="PingFang SC" font-size="23" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="60" dy="0">(a)  任务与会话</tspan></text>
+<text x="390" y="221.785" font-family="PingFang SC" font-size="23" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="390" dy="0">(b)  模型决策</tspan></text>
+<text x="866" y="221.785" font-family="PingFang SC" font-size="23" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="866" dy="0">(c)  本地工具</tspan></text>
+<rect x="68" y="252" width="232" height="110" rx="5" fill="#F0F4EF" stroke="#CBD7D1" stroke-width="1"/>
+<rect x="60" y="244" width="232" height="110" rx="5" fill="#FFFEFA" stroke="#CBD7D1" stroke-width="1.4"/>
+<text x="77" y="275.17" font-family="Times New Roman" font-size="26" fill="#168574" font-weight="400" font-style="italic" text-anchor="start"><tspan x="77" dy="0">q</tspan></text>
+<text x="111" y="275.4" font-family="PingFang SC" font-size="20" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="111" dy="0">自然语言问题</tspan></text>
+<text x="78" y="311.42" font-family="PingFang SC" font-size="19" fill="#173E35" font-weight="400" font-style="normal" text-anchor="start"><tspan x="78" dy="0">2024 年 PM2.5 Top 5</tspan><tspan x="78" dy="23.37">绘制月度变化曲线</tspan></text>
+<polyline points="300,296 390,296" fill="none" stroke="#83958C" stroke-width="2.1" stroke-linejoin="round" />
+<polygon points="390,296 382,299.44 382,292.56" fill="#83958C" stroke="#83958C" stroke-width="0.5" stroke-linejoin="round" />
+<rect x="79" y="391" width="210" height="80" rx="4" fill="#EFF3EE" stroke="#CBD7D1" stroke-width="1"/>
+<rect x="69" y="382" width="210" height="80" rx="4" fill="#FFFEFA" stroke="#CBD7D1" stroke-width="1.3"/>
+<text x="84" y="413.375" font-family="Times New Roman" font-size="25" fill="#173E35" font-weight="400" font-style="italic" text-anchor="start"><tspan x="84" dy="0">Hₜ</tspan></text>
+<text x="136" y="413.4" font-family="PingFang SC" font-size="20" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="136" dy="0">会话上下文</tspan></text>
+<text x="85" y="446.31" font-family="PingFang SC" font-size="18" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="85" dy="0">历史问答 · 工具结果</tspan></text>
+<polyline points="289,422 321,422 321,344 390,344" fill="none" stroke="#83958C" stroke-width="2.1" stroke-linejoin="round" />
+<polygon points="390,344 382,347.44 382,340.56" fill="#83958C" stroke="#83958C" stroke-width="0.5" stroke-linejoin="round" />
+<rect x="390" y="244" width="345" height="172" rx="9" fill="#E9F4EF" stroke="#7BB4A2" stroke-width="1.8"/>
+<rect x="391" y="245" width="343" height="5" rx="0" fill="#168574" stroke="none" stroke-width="0"/>
+<text x="562.5" y="293.94" font-family="Times New Roman" font-size="32" fill="#173E35" font-weight="600" font-style="normal" text-anchor="middle"><tspan x="562.5" dy="0">DeepSeek Flash</tspan></text>
+<text x="562.5" y="329.695" font-family="PingFang SC" font-size="21" fill="#173E35" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="562.5" dy="0">读取上下文 · 决定下一步</tspan></text>
+<rect x="420" y="356" width="60" height="36" rx="4" fill="#FFFEFA" stroke="#A4CABC" stroke-width="1"/>
+<text x="450" y="380.08" font-family="Times New Roman" font-size="24" fill="#173E35" font-weight="400" font-style="italic" text-anchor="middle"><tspan x="450" dy="0">q</tspan></text>
+<rect x="503" y="356" width="84" height="36" rx="4" fill="#FFFEFA" stroke="#A4CABC" stroke-width="1"/>
+<text x="545" y="380.08" font-family="Times New Roman" font-size="24" fill="#173E35" font-weight="400" font-style="italic" text-anchor="middle"><tspan x="545" dy="0">Hₜ</tspan></text>
+<rect x="610" y="356" width="60" height="36" rx="4" fill="#FFFEFA" stroke="#A4CABC" stroke-width="1"/>
+<text x="640" y="380.08" font-family="Times New Roman" font-size="24" fill="#173E35" font-weight="400" font-style="italic" text-anchor="middle"><tspan x="640" dy="0">oₜ</tspan></text>
+<text x="490.5" y="379.9" font-family="Times New Roman" font-size="20" fill="#60776F" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="490.5" dy="0">+</tspan></text>
+<text x="597.5" y="379.9" font-family="Times New Roman" font-size="20" fill="#60776F" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="597.5" dy="0">+</tspan></text>
+<polyline points="735,289 852,289" fill="none" stroke="#168574" stroke-width="2.7" stroke-linejoin="round" />
+<polygon points="852,289 844,292.44 844,285.56" fill="#168574" stroke="#168574" stroke-width="0.5" stroke-linejoin="round" />
+<text x="791.5" y="268.375" font-family="Times New Roman" font-size="25" fill="#168574" font-weight="400" font-style="italic" text-anchor="middle"><tspan x="791.5" dy="0">aₜ</tspan></text>
+<text x="793.5" y="323.51500000000004" font-family="PingFang SC" font-size="17" fill="#168574" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="793.5" dy="0">工具 + 参数</tspan></text>
+<rect x="852" y="237" width="354" height="251" rx="7" fill="#F5F7F3" stroke="#D5DED7" stroke-width="1.2"/>
+<rect x="868" y="249" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<rect x="880" y="266" width="23" height="28" rx="2" fill="none" stroke="#60776F" stroke-width="1.5"/>
+<polyline points="885,274 898,274" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<polyline points="885,280 898,280" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<polyline points="885,286 894,286" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<text x="914" y="276.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="914" dy="0">读取目录</tspan></text>
+<text x="914" y="301.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="914" dy="0">城市 / 年份</tspan></text>
+<rect x="1036" y="249" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<polyline points="1046,268 1074,268 1063,279 1063,292 1057,289 1057,279 1046,268" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<text x="1082" y="276.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">数据清洗</tspan></text>
+<text x="1082" y="301.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">缺失 / 去重</tspan></text>
+<rect x="868" y="327" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<rect x="879" y="345" width="25" height="27" rx="2" fill="none" stroke="#60776F" stroke-width="1.5"/>
+<polyline points="885,345 885,372" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<polyline points="890,353 899,353" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<polyline points="890,360 899,360" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<text x="914" y="354.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="914" dy="0">国标查询</tspan></text>
+<text x="914" y="379.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="914" dy="0">指标 / 周期</tspan></text>
+<rect x="1036" y="327" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<text x="1060.5" y="367.03" font-family="Times New Roman" font-size="34" fill="#168574" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="1060.5" dy="0">Σ</tspan></text>
+<text x="1082" y="354.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">聚合统计</tspan></text>
+<text x="1082" y="379.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">分组 / 计数</tspan></text>
+<rect x="868" y="405" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<ellipse cx="892" cy="436" rx="14" ry="14" fill="none" stroke="#60776F" stroke-width="1.5"/>
+<polyline points="884,436 889,441 900,430" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<text x="914" y="432.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="914" dy="0">结果校验</tspan></text>
+<text x="914" y="457.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="914" dy="0">数值 / 分母</tspan></text>
+<rect x="1036" y="405" width="154" height="66" rx="4" fill="#FFFEFA" stroke="#DDE5DF" stroke-width="1"/>
+<polyline points="1047,423 1047,449 1075,449" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<polyline points="1051,442 1058,432 1065,437 1073,426" fill="none" stroke="#60776F" stroke-width="1.7" stroke-linejoin="round" />
+<text x="1082" y="432.2525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">绘图导出</tspan></text>
+<text x="1082" y="457.3675" font-family="PingFang SC" font-size="16.5" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="1082" dy="0">SVG / 报告</tspan></text>
+<rect x="390" y="494" width="345" height="96" rx="7" fill="#EDF3F9" stroke="#9CB6CE" stroke-width="1.4"/>
+<text x="563.5" y="528.465" font-family="Times New Roman" font-size="27" fill="#4C78A6" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="563.5" dy="0">Observation  oₜ</tspan></text>
+<text x="562.5" y="565.7525" font-family="PingFang SC" font-size="19.5" fill="#173E35" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="562.5" dy="0">统计表 · 国标判定 · 校验结果</tspan></text>
+<polyline points="852,437 790,437 790,542 735,542" fill="none" stroke="#4C78A6" stroke-width="2.7" stroke-linejoin="round" />
+<polygon points="735,542 743,538.56 743,545.44" fill="#4C78A6" stroke="#4C78A6" stroke-width="0.5" stroke-linejoin="round" />
+<text x="794" y="568.515" font-family="PingFang SC" font-size="17" fill="#4C78A6" font-weight="400" font-style="normal" text-anchor="middle"><tspan x="794" dy="0">结果反馈</tspan></text>
+<polyline points="562,494 562,416" fill="none" stroke="#4C78A6" stroke-width="2.7" stroke-linejoin="round" />
+<polygon points="562,416 565.44,424 558.56,424" fill="#4C78A6" stroke="#4C78A6" stroke-width="0.5" stroke-linejoin="round" />
+<text x="579" y="466.605" font-family="PingFang SC" font-size="19" fill="#4C78A6" font-weight="400" font-style="normal" text-anchor="start"><tspan x="579" dy="0">更新上下文</tspan></text>
+<polyline points="390,382 342,382 342,596 300,596" fill="none" stroke="#AF8046" stroke-width="2.6" stroke-linejoin="round" />
+<polygon points="300,596 308,592.56 308,599.44" fill="#AF8046" stroke="#AF8046" stroke-width="0.5" stroke-linejoin="round" />
+<text x="287" y="502.9" font-family="PingFang SC" font-size="20" fill="#AF8046" font-weight="400" font-style="normal" text-anchor="start"><tspan x="287" dy="0">完成</tspan></text>
+<rect x="60" y="541" width="240" height="103" rx="6" fill="#F8F0E3" stroke="#D7C4A7" stroke-width="1.4"/>
+<text x="77" y="570.49" font-family="PingFang SC" font-size="22" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="77" dy="0">最终答复与可视化</tspan></text>
+<polyline points="80,589 80,625 143,625" fill="none" stroke="#AF8046" stroke-width="1.5" stroke-linejoin="round" />
+<rect x="87" y="596" width="7" height="29" rx="1" fill="#168574" stroke="none" stroke-width="0"/>
+<rect x="98" y="605" width="7" height="20" rx="1" fill="#ADC7BA" stroke="none" stroke-width="0"/>
+<rect x="109" y="607" width="7" height="18" rx="1" fill="#ADC7BA" stroke="none" stroke-width="0"/>
+<rect x="120" y="609" width="7" height="16" rx="1" fill="#ADC7BA" stroke="none" stroke-width="0"/>
+<rect x="131" y="609" width="7" height="16" rx="1" fill="#ADC7BA" stroke="none" stroke-width="0"/>
+<text x="160" y="602.24" font-family="PingFang SC" font-size="18" fill="#173E35" font-weight="400" font-style="normal" text-anchor="start"><tspan x="160" dy="0">统计结论</tspan><tspan x="160" dy="22.14">表格 / SVG</tspan></text>
+<rect x="852" y="541" width="354" height="103" rx="6" fill="#F5F4EE" stroke="#D5D4C6" stroke-width="1.3"/>
+<rect x="877" y="568" width="48" height="44" rx="0" fill="#E5E9E0" stroke="#60776F" stroke-width="1.4"/>
+<ellipse cx="901" cy="608" rx="24" ry="7" fill="#E5E9E0" stroke="#60776F" stroke-width="1.4"/>
+<ellipse cx="901" cy="568.5" rx="24" ry="7.5" fill="#F9FAF5" stroke="#60776F" stroke-width="1.4"/>
+<polyline points="878,582 888,587 914,587 924,582" fill="none" stroke="#60776F" stroke-width="1.2" stroke-linejoin="round" />
+<polyline points="878,593 888,598 914,598 924,593" fill="none" stroke="#60776F" stroke-width="1.2" stroke-linejoin="round" />
+<text x="947" y="573.58" font-family="PingFang SC" font-size="24" fill="#173E35" font-weight="600" font-style="normal" text-anchor="start"><tspan x="947" dy="0">本地数据 D</tspan></text>
+<text x="947" y="603.9000000000001" font-family="PingFang SC" font-size="20" fill="#173E35" font-weight="400" font-style="normal" text-anchor="start"><tspan x="947" dy="0">125,172 条城市日</tspan></text>
+<text x="947" y="630.015" font-family="PingFang SC" font-size="17" fill="#60776F" font-weight="400" font-style="normal" text-anchor="start"><tspan x="947" dy="0">CSV / SQLite · 2024</tspan></text>
+<polyline points="1030,541 1030,488" fill="none" stroke="#83958C" stroke-width="2.1" stroke-linejoin="round" />
+<polygon points="1030,488 1033.44,496 1026.56,496" fill="#83958C" stroke="#83958C" stroke-width="0.5" stroke-linejoin="round" />
+<polyline points="396,674 433,674" fill="none" stroke="#168574" stroke-width="2.5" stroke-linejoin="round" />
+<polygon points="433,674 425,677.44 425,670.56" fill="#168574" stroke="#168574" stroke-width="0.5" stroke-linejoin="round" />
+<text x="443" y="679.605" font-family="PingFang SC" font-size="19" fill="#168574" font-weight="400" font-style="normal" text-anchor="start"><tspan x="443" dy="0">工具请求 aₜ</tspan></text>
+<polyline points="633,674 670,674" fill="none" stroke="#4C78A6" stroke-width="2.5" stroke-linejoin="round" />
+<polygon points="670,674 662,677.44 662,670.56" fill="#4C78A6" stroke="#4C78A6" stroke-width="0.5" stroke-linejoin="round" />
+<text x="681" y="679.605" font-family="PingFang SC" font-size="19" fill="#4C78A6" font-weight="400" font-style="normal" text-anchor="start"><tspan x="681" dy="0">执行结果 oₜ</tspan></text>
+<polyline points="877,674 914,674" fill="none" stroke="#AF8046" stroke-width="2.5" stroke-linejoin="round" />
+<polygon points="914,674 906,677.44 906,670.56" fill="#AF8046" stroke="#AF8046" stroke-width="0.5" stroke-linejoin="round" />
+<text x="924" y="679.605" font-family="PingFang SC" font-size="19" fill="#AF8046" font-weight="400" font-style="normal" text-anchor="start"><tspan x="924" dy="0">最终输出</tspan></text>
+</svg>
