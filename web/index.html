@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#153f35">
+  <meta name="description" content="清穹 AirScope，DeepSeek 驱动的空气质量分析工作台。模型选择工具，本地计算数据，逐步呈现可核验的回答。">
+  <title>清穹 AirScope · 空气质量分析工作台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23173e35'/%3E%3Cpath d='M7 25h17c9 0 10-11 3-11-4 0-5 3-5 5M12 32h16M8 18h9' fill='none' stroke='%23c5dda8' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h7l2 2 2-2h7v15h-7l-2 2-2-2H3zM12 6v15"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M19 9a7.5 7.5 0 0 0-13-4L4 8m16 8-2 3a7.5 7.5 0 0 1-13-4"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-11v1"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3C9 2 2 7 4 15s16 6 16-12ZM5 19 16 8"/></symbol>
+  </defs></svg>
+
+  <aside class="sidebar">
+    <a class="brand" href="#workspace" aria-label="清穹 AirScope 工作台">
+      <svg class="brand-mark" viewBox="0 0 44 44" fill="none" aria-hidden="true"><path d="M8 27a15 15 0 1 1 28-2" stroke="currentColor" stroke-width="2"/><path d="M4 31h24c9 0 12-10 4-12-5-1-7 2-7 5M11 38h16M9 24h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="10" r="2" fill="currentColor"/></svg>
+      <span><strong>清穹<span class="brand-en">AirScope</span></strong><small>空气质量分析工作台</small></span>
+    </a>
+    <div class="sidebar-label">探索 / EXPLORE</div>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#workspace" class="nav-link active" data-view="workspace"><svg><use href="#i-grid"/></svg><span>工作台</span><span class="nav-active-dot"></span></a>
+      <a href="#history" class="nav-link" data-view="history"><svg><use href="#i-clock"/></svg><span>分析记录</span><span class="nav-count" id="history-count">—</span></a>
+      <a href="#data" class="nav-link" data-view="data"><svg><use href="#i-data"/></svg><span>数据与口径</span></a>
+      <a href="#guide" class="nav-link" data-view="guide"><svg><use href="#i-book"/></svg><span>演示说明</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="local-engine"><span class="status-dot"></span><span id="engine-label">DeepSeek · 本地工具</span></div>
+      <p>让每一次空气观察<br>都有可追溯的依据。</p>
+      <div class="sidebar-foot"><span>AIRSCOPE / INTELLIGENCE</span><span>01</span></div>
+    </div>
+    <svg class="sidebar-orbit" viewBox="0 0 240 260" fill="none" aria-hidden="true"><circle cx="160" cy="170" r="125"/><circle cx="160" cy="170" r="100"/><circle cx="160" cy="170" r="75"/><path d="M-10 170h280M160 0v280"/></svg>
+  </aside>
+
+  <div class="app-shell">
+    <header class="topbar"><div class="breadcrumb">清穹 <span>/</span> <strong id="view-label">分析工作台</strong></div><div class="topbar-right"><span class="connection" id="connection"><span class="status-dot pending"></span>正在连接本地数据</span><span class="topbar-date" id="today"></span></div></header>
+    <main>
+      <section id="view-workspace" class="view" aria-labelledby="workspace-title">
+        <div class="workspace-heading">
+          <div><div class="eyebrow"><span></span> MAKE THE INVISIBLE, VISIBLE</div><h1 id="workspace-title">让空气数据，<em>说清楚。</em></h1><p class="lead">与 DeepSeek 一起提问，让本地数据成为回答的依据。</p></div>
+          <div class="heading-note"><span class="tiny-label">OBSERVE · UNDERSTAND · ACT</span><svg viewBox="0 0 110 50" fill="none" aria-hidden="true"><path d="M0 35h15l7-13 12 10 10-24 12 35 12-20 11 7 9-15 9 8h13" stroke="currentColor" stroke-width="1.7"/><path d="M0 48h110" stroke="currentColor" stroke-opacity=".18"/></svg><span id="heading-coverage">正在读取数据范围</span></div>
+        </div>
+
+        <div class="intelligence-strip" aria-label="模型与本地数据状态">
+          <div class="model-identity"><span class="model-monogram" aria-hidden="true">D</span><div><strong id="model-name">DeepSeek</strong><small id="model-caption">正在读取模型配置</small></div><span class="model-connection" id="model-connection">连接中</span></div>
+          <div class="workspace-facts"><span><strong id="workspace-rows">—</strong><small>条本地记录</small></span><span><strong id="workspace-cities">—</strong><small>座覆盖城市</small></span><span><strong id="workspace-years">—</strong><small>个可用年份</small></span></div>
+        </div>
+        <form id="query-form" class="composer">
+          <label for="query-input" class="composer-label"><svg><use href="#i-leaf"/></svg>你想了解什么？<span>DeepSeek 理解问题 · 本地工具计算</span></label>
+          <div class="composer-input-row"><textarea id="query-input" rows="2" maxlength="2000" placeholder="例如：找出有数据年份 PM2.5 年均浓度最高的 5 个城市，看看月度变化" aria-describedby="query-help"></textarea><button id="run-button" class="primary-button" type="submit"><span class="button-text">开始分析</span><svg><use href="#i-arrow"/></svg></button></div>
+          <div class="composer-bottom"><span id="query-help"><span class="session-indicator"></span><span id="session-label">新的分析会话</span> · 支持上下文追问</span><span class="keyboard-hint"><kbd>⌘</kbd> / <kbd>Ctrl</kbd> + <kbd>Enter</kbd> 运行</span></div>
+        </form>
+        <div class="examples-row"><span class="examples-label">试着问</span><div id="examples" class="examples"></div></div>
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+        <details id="conversation" class="conversation" hidden><summary><span>本会话的对话</span><span id="conversation-count"></span></summary><div id="conversation-list" class="conversation-list" aria-label="最近的用户与助手对话"></div><div class="conversation-footer"><span>最近对话保存在当前浏览器，可继续追问。</span><button id="new-conversation" class="text-button" type="button">新建会话 ↗</button></div></details>
+        <div id="loading" class="loading-panel" hidden aria-live="polite"><span class="spinner"></span><div><strong>DeepSeek 正在分析问题</strong><p>下方仅展示服务实际返回的阶段与工具调用。</p></div><span class="loading-engine">DEEPSEEK + LOCAL TOOLS</span></div>
+        <details id="live-process" class="panel process-panel" hidden open><summary><span><span class="section-kicker">LIVE TOOL ACTIVITY</span><strong>计划与执行过程</strong></span><span id="process-status" class="process-status">等待服务返回</span></summary><ol id="stage-list" class="stage-list" aria-label="模型任务阶段"></ol><ol id="live-trace-list" class="trace-list" aria-label="实时工具轨迹"></ol><div id="stream-answer" class="stream-answer" hidden><span class="section-kicker">DEEPSEEK ANSWER</span><div id="stream-answer-content" class="answer-copy"></div></div></details>
+        <div id="empty-state" class="empty-state" hidden></div>
+
+        <section id="results" class="results" hidden aria-label="分析结果">
+          <div class="result-heading"><div><div class="eyebrow result-eyebrow">ANALYSIS / <span id="result-run-label"></span></div><h2 id="result-title"></h2><div id="plan-tags" class="plan-tags"></div></div><div class="result-meta"><span id="result-duration"></span><button id="new-session" class="text-button" type="button">新建会话 <span>↗</span></button></div></div>
+          <section id="answer-panel" class="answer-panel" hidden aria-labelledby="answer-title"><div class="answer-heading"><span class="answer-emblem" aria-hidden="true">D</span><h3 id="answer-title">DeepSeek 的回答</h3><span id="answer-model"></span></div><div id="answer-content" class="answer-copy"></div><div id="answer-usage" class="answer-usage" hidden></div></section>
+          <p id="result-summary" class="result-summary"></p>
+          <div id="analysis-tabs" class="analysis-tabs" role="tablist" aria-label="选择分析结果" hidden></div>
+          <div id="analysis-evidence" role="tabpanel" aria-label="当前分析的本地计算结果">
+          <div id="metrics" class="metrics-grid"></div>
+          <div id="charts" class="charts-grid"></div>
+          <div id="insight" class="insight" hidden></div>
+          <div class="result-bottom-grid">
+            <section id="result-table-panel" class="panel table-panel"><div class="panel-header"><div><span class="section-kicker">THE NUMBERS</span><h3>结果明细</h3></div><span id="row-count" class="subtle-label"></span></div><div class="table-scroll" tabindex="0" role="region" aria-label="分析结果表"><table id="result-table"></table></div><div id="standard-note" class="standard-note"></div></section>
+            <section id="result-trace-panel" class="panel trace-panel"><div class="panel-header"><div><span class="section-kicker">HOW WE GOT HERE</span><h3>工具轨迹</h3></div><span class="live-badge">可追溯</span></div><ol id="trace-list" class="trace-list"></ol></section>
+          </div>
+          <section id="warnings" class="warnings" aria-label="质量警告"></section>
+          </div>
+          <footer class="export-bar"><div><svg><use href="#i-download"/></svg><span><strong>把这次观察带走</strong><small>保存计算结果与图表，便于复核与展示</small></span></div><div id="exports" class="export-actions"></div></footer>
+          <div class="followup-row"><span>继续追问</span><button id="followup-button" type="button">再看这几个城市的 PM10 超标情况 <svg><use href="#i-arrow"/></svg></button></div>
+        </section>
+      </section>
+
+      <section id="view-history" class="view" hidden aria-labelledby="history-title"><div class="page-heading"><div><div class="eyebrow">YOUR ANALYSES</div><h1 id="history-title">每一次提问，都有迹可循。</h1><p class="lead">打开已保存的分析，复核数据、图表与计算轨迹。</p></div><button id="refresh-history" class="secondary-button" type="button"><svg><use href="#i-refresh"/></svg>刷新记录</button></div><div id="history-list" class="history-list"></div></section>
+
+      <section id="view-data" class="view" hidden aria-labelledby="data-title"><div class="page-heading"><div><div class="eyebrow">DATA & METHODOLOGY</div><h1 id="data-title">先了解数据，再理解结论。</h1><p class="lead">数据来源、覆盖范围、清洗记录与判断口径，在这里公开。</p></div><button id="refresh-data" class="secondary-button" type="button"><svg><use href="#i-refresh"/></svg>刷新数据</button></div><div id="dataset-content"></div><section class="panel standards-panel"><div class="panel-header"><div><span class="section-kicker">REFERENCE STANDARD</span><h3>标准与判断口径</h3></div></div><div id="standards-content"></div></section></section>
+
+      <section id="view-guide" class="view" hidden aria-labelledby="guide-title"><div class="page-heading"><div><div class="eyebrow">A WALK THROUGH AIRSCOPE</div><h1 id="guide-title">从提问，到有据可查的答案。</h1><p class="lead">模型负责理解与回答，数据工具提供可核验的依据。</p></div><span class="outline-badge">DeepSeek 智能分析</span></div>
+        <div class="guide-intro"><div class="guide-intro-copy"><span class="section-kicker">MODEL + LOCAL EVIDENCE</span><h2>计算留在本地，<br>依据展示在眼前。</h2><p>用一句话启动分析：DeepSeek 通过联网 API 理解问题、选择工具；本地工具读取数据并完成筛选、聚合、比较与绘图；模型读取工具结果，再组织中文回答。页面同步展示真实工具过程。</p></div><div class="guide-flow"><span>自然语言问题</span><span class="flow-arrow">↓</span><span>DeepSeek 理解问题、选择工具</span><span class="flow-arrow">↓</span><span>本地数据计算</span><span class="flow-arrow">↓</span><span>模型读取结果，形成回答</span></div></div>
+        <div class="guide-steps"><article><span class="step-number">01</span><h3>确认数据就绪</h3><p>在「数据与口径」查看实际年份、城市范围和来源。没有数据时，将具有正确字段的 CSV 放入项目 data/raw 目录，再按项目说明重建数据索引并重新启动服务。</p><a href="#data">查看数据范围 <span>↗</span></a></article><article><span class="step-number">02</span><h3>提出一个具体问题</h3><p>指定年份、污染物、城市或比较方式。点击示例即可填入需求书问题，确认后开始分析；打开或刷新页面不会自动调用模型。</p><a href="#workspace">回到分析工作台 <span>↗</span></a></article><article><span class="step-number">03</span><h3>追问，并检查证据</h3><p>可承接当前城市、年份继续追问，也可以直接询问数据口径。展开执行过程检查工具参数、真实观测与用时；多项分析分别切换查看。</p></article><article><span class="step-number">04</span><h3>导出与复现</h3><p>下载 CSV、JSON、HTML 报告或 SVG 图表。分析记录可以重新打开；浏览器保留会话标识和最近对话。</p></article></div>
+        <div class="method-note"><svg><use href="#i-info"/></svg><p>演示建议：城市排名 → 月度变化 → PM10 超标追问 → 工具轨迹 → HTML 报告。用同一组城市串起一条完整的空气质量观察线索。</p></div>
+      </section>
+      <footer class="page-footer"><span>清穹 AirScope</span><span>洞察有依据，空气有刻度。</span><span>INTELLIGENCE · LOCAL EVIDENCE</span></footer>
+    </main>
+  </div>
+  <div id="chart-tooltip" class="chart-tooltip" role="tooltip" hidden></div>
+</body>
+</html>

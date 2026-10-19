@@ -1,0 +1,200 @@
+{
+  "description": "清穹 AirScope v2：DeepSeek原生工具调用、本地计算、NDJSON实时事件。",
+  "GET /api/status": {
+    "ready": true,
+    "dataset": {
+      "name": "真实来源",
+      "rows": 0,
+      "cities": [],
+      "provinces": [],
+      "years": [],
+      "date_min": "",
+      "date_max": "",
+      "source_url": "",
+      "sha256": "",
+      "quality": {},
+      "files": []
+    },
+    "planner": "deepseek-react",
+    "history_count": 0,
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "api_configured": true
+  },
+  "POST /api/analyze": {
+    "request": {
+      "query": "找出2024年PM2.5年均浓度最高的5个城市，画出月度变化曲线",
+      "session_id": "optional-browser-uuid"
+    },
+    "response": {
+      "ok": true,
+      "id": "runid",
+      "query": "",
+      "title": "",
+      "summary": "",
+      "insight": "",
+      "elapsed_ms": 0,
+      "plan": {
+        "intent": "ranking|exceedance|trend|seasonal|anomaly",
+        "pollutant": "PM2.5",
+        "year": 2024,
+        "months": [],
+        "cities": [],
+        "provinces": [],
+        "group_by": "city|province",
+        "top_n": 5
+      },
+      "metrics": [
+        {
+          "label": "有效城市日",
+          "value": 123,
+          "unit": "条"
+        }
+      ],
+      "table": {
+        "columns": [
+          {
+            "key": "city",
+            "label": "城市"
+          },
+          {
+            "key": "mean",
+            "label": "均值"
+          }
+        ],
+        "rows": []
+      },
+      "charts": [
+        {
+          "type": "bar|line|donut",
+          "title": "",
+          "unit": "μg/m³",
+          "labels": [],
+          "series": [
+            {
+              "name": "城市",
+              "values": []
+            }
+          ],
+          "threshold": 35,
+          "threshold_label": "年均限值"
+        }
+      ],
+      "standard": {
+        "name": "GB 3095—2012 二级（赛事指定）",
+        "limit": 35,
+        "unit": "μg/m³",
+        "basis": "年平均",
+        "note": "",
+        "url": ""
+      },
+      "warnings": [],
+      "quality": {},
+      "context": {
+        "cities": [],
+        "year": 2024
+      },
+      "trace": [
+        {
+          "tool": "load_data",
+          "label": "分片读取",
+          "status": "done",
+          "duration_ms": 0,
+          "observation": "已读取真实记录"
+        }
+      ],
+      "downloads": {
+        "json": "/outputs/runid/result.json",
+        "csv": "/outputs/runid/table.csv",
+        "html": "/outputs/runid/report.html",
+        "svg": "/outputs/runid/chart-1.svg"
+      },
+      "answer": "模型最终答复",
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "usage": {},
+      "analysis_completed": true,
+      "analyses": []
+    },
+    "error_response": {
+      "ok": false,
+      "error": "说明原因并指出可用范围",
+      "suggestions": []
+    }
+  },
+  "GET /api/history": {
+    "runs": [
+      {
+        "id": "",
+        "query": "",
+        "title": "",
+        "created_at": "",
+        "elapsed_ms": 0
+      }
+    ]
+  },
+  "GET /api/result?id=runid": "完整已保存分析响应；附加session_id可以恢复上下文，不调用模型。",
+  "GET /api/standards": {
+    "standards": [],
+    "note": "赛事指定历史标准，不宣称现行标准"
+  },
+  "GET /api/dataset": "与 status.dataset 相同",
+  "notes": [
+    "普通问答允许analyses/table/charts为空，answer正常显示。",
+    "模型API联网，CSV/SQLite/绘图在本地，浏览器不含密钥。",
+    "页面初始化和示例填入不触发模型调用，提交后才调用。",
+    "export_result是应用收尾，trace.origin=application；原生工具带模型call_id。",
+    "--offline是明确规则备用模式，不显示为模型运行。"
+  ],
+  "POST /api/analyze/stream": {
+    "request": {
+      "query": "中文问题",
+      "session_id": "浏览器会话ID"
+    },
+    "content_type": "application/x-ndjson; charset=utf-8",
+    "events": [
+      {
+        "type": "stage",
+        "message": "模型实际轮次和执行阶段"
+      },
+      {
+        "type": "tool_start",
+        "tool": "analyze_air_quality",
+        "label": "计算本地数据",
+        "call_id": "模型tool_call.id",
+        "arguments": {},
+        "status": "running"
+      },
+      {
+        "type": "tool_end",
+        "tool": "analyze_air_quality",
+        "call_id": "同上",
+        "arguments": {},
+        "status": "done",
+        "duration_ms": 0,
+        "observation": "实际结果摘要"
+      },
+      {
+        "type": "answer",
+        "content": "模型最终答复"
+      },
+      {
+        "type": "result",
+        "result": "完整分析响应"
+      },
+      {
+        "type": "error",
+        "error": "实际错误"
+      }
+    ]
+  },
+  "analyses_item": "每项为独立分析结果+plan+analysis_id+selected_cities+validation+downloads；主结果沿用最近一次分析，analyses保留全部。",
+  "tools": [
+    "get_dataset_info",
+    "clean_data",
+    "get_standard",
+    "analyze_air_quality",
+    "validate_result",
+    "render_visualization"
+  ]
+}

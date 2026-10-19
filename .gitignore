@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+.presentation-build/
+.qa/
+.playwright-cli/
+.env*
+!.env.example
+*.zip
+data/source-cache/daily/
+outputs/
+data/airquality.sqlite
+data/airquality.sqlite-*

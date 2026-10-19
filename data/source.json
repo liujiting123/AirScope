@@ -1,0 +1,214 @@
+{
+  "analysis_year": 2024,
+  "name": "2024年中国城市空气质量监测数据",
+  "source_url": "https://quotsoft.net/air/",
+  "file_url_template": "https://quotsoft.net/air/data/china_cities_{date}.csv",
+  "upstream_url": "https://air.cnemc.cn:18007/",
+  "source_period": {
+    "start": "2024-01-01",
+    "end": "2024-12-31"
+  },
+  "supplemental_boundary_file": "2025-01-01 hourly city CSV, used for 2024-12-31 hour 00",
+  "source_files_available": 367,
+  "source_file_status_counts": {
+    "downloaded": 0,
+    "cached": 367,
+    "missing": 0,
+    "failed": 0
+  },
+  "source_missing_dates": [],
+  "sha256_manifest": "source-cache/SHA256SUMS.txt",
+  "cached_source_directory": "source-cache/daily/",
+  "province_mapping": {
+    "name": "中国行政区划省市县代码公开JSON",
+    "url": "https://raw.githubusercontent.com/modood/Administrative-divisions-of-China/master/dist/pcas-code.json",
+    "cached_file": "source-cache/administrative-divisions-pcas-code.json",
+    "sha256_in_manifest": true,
+    "supplemental_source_label_groups": {
+      "山东省": [
+        "寿光",
+        "章丘",
+        "即墨",
+        "胶南",
+        "胶州",
+        "莱西",
+        "平度",
+        "蓬莱",
+        "招远",
+        "莱州",
+        "荣成",
+        "文登",
+        "乳山"
+      ],
+      "江苏省": [
+        "吴江",
+        "昆山",
+        "常熟",
+        "张家港",
+        "太仓",
+        "句容",
+        "江阴",
+        "宜兴",
+        "金坛",
+        "溧阳",
+        "海门"
+      ],
+      "浙江省": [
+        "临安",
+        "富阳",
+        "义乌",
+        "诸暨"
+      ],
+      "辽宁省": [
+        "瓦房店"
+      ],
+      "云南省": [
+        "楚雄州",
+        "红河州",
+        "文山州",
+        "大理州",
+        "德宏州",
+        "怒江州",
+        "迪庆州"
+      ],
+      "新疆维吾尔自治区": [
+        "巴音郭楞州",
+        "伊犁哈萨克州",
+        "石河子",
+        "五家渠"
+      ],
+      "甘肃省": [
+        "兰州新区"
+      ],
+      "江西省": [
+        "赣江新区"
+      ],
+      "河北省": [
+        "雄安新区"
+      ],
+      "陕西省": [
+        "西咸新区"
+      ]
+    }
+  },
+  "processing": {
+    "language": "仅Python标准库",
+    "script": "scripts/prepare_data.py",
+    "source_layout": "宽表；每行包含日期、小时（0—23）和污染物类型，各城市为列",
+    "daily_window": "日期D取源文件D日小时1—23及D+1日小时00，共24个本地小时值。",
+    "daily_means": "PM2.5、PM10、SO2、NO2、CO分别对有效小时值求算术平均，每日需至少20个有效小时值。",
+    "o3_daily_max_8h": "按HJ 663—2013计算结束时标08—24的17个连续8小时均值，每窗至少6个有效小时；至少14个有效窗时有效。未达14窗但最大8小时值超过GB 3095—2012二级限值160 μg/m³时，按该标准仍视为有效。",
+    "o3_hourly_max": "同一24小时自然日中，至少20个有效小时值时计算日最大1小时O3，供HJ 633—2012日报AQI使用；不足20小时留空。",
+    "aqi": "使用HJ 633—2012日均浓度、O3日最大1小时值和日最大8小时值派生，保留AQI、中文等级、首要污染物、原因和口径说明。",
+    "quality": "HJ 633—2012派生的中文AQI等级。",
+    "data_quality": "分号分隔的污染物有效性、源文件缺失和省份映射标记。",
+    "missing_values": "空值、非数值、负值和非有限值视为缺失；不插值。",
+    "city_filter": "仅排除全年六项日报污染物均无有效值的源地区列；其他地区保留全年366个日期行。",
+    "province_unknown_policy": "无法映射的源地区名称保持不变，省份留空；历史县级市、自治州和新区按明确静态省份分组补充映射，不更改源名称。",
+    "standards": "按比赛指定历史口径GB 3095—2012、HJ 633—2012和HJ 663—2013处理2024数据。"
+  },
+  "output": "raw/air_quality_2024.csv",
+  "statistics": {
+    "rows": 125172,
+    "cities": 342,
+    "dates": 366,
+    "city_dates": 125172,
+    "candidate_city_dates": 137250,
+    "missing_daily_rows": 0,
+    "missing_daily_dates": [],
+    "unmapped_cities": [],
+    "excluded_all_year_empty_cities": [
+      "三沙",
+      "临安",
+      "义乌",
+      "乳山",
+      "即墨",
+      "句容",
+      "吴江",
+      "太仓",
+      "宜兴",
+      "富阳",
+      "寿光",
+      "常熟",
+      "平度",
+      "张家港",
+      "招远",
+      "文登",
+      "昆山",
+      "江阴",
+      "海门",
+      "溧阳",
+      "瓦房店",
+      "甘孜州",
+      "章丘",
+      "胶南",
+      "胶州",
+      "荣成",
+      "莱州",
+      "莱西",
+      "蓬莱",
+      "诸暨",
+      "那曲",
+      "金坛",
+      "黔东南州"
+    ],
+    "filtered_empty_city_days": 12078,
+    "aqi_derived_rows": 120859,
+    "aqi_unavailable_reasons": {
+      "日报指标缺失或无效：PM10；不以缺项浓度计算完整AQI。": 1510,
+      "日报指标缺失或无效：PM2.5、PM10、SO2、NO2、CO、O3_8h；不以缺项浓度计算完整AQI。": 1717,
+      "日报指标缺失或无效：PM2.5、O3_8h；不以缺项浓度计算完整AQI。": 1,
+      "日报指标缺失或无效：PM2.5、PM10、O3_8h；不以缺项浓度计算完整AQI。": 4,
+      "日报指标缺失或无效：PM2.5、PM10、SO2、NO2、CO；不以缺项浓度计算完整AQI。": 98,
+      "日报指标缺失或无效：PM2.5；不以缺项浓度计算完整AQI。": 28,
+      "日报指标缺失或无效：O3_8h；不以缺项浓度计算完整AQI。": 407,
+      "日报指标缺失或无效：PM10、CO；不以缺项浓度计算完整AQI。": 78,
+      "日报指标缺失或无效：CO；不以缺项浓度计算完整AQI。": 172,
+      "日报指标缺失或无效：PM10、SO2、CO；不以缺项浓度计算完整AQI。": 10,
+      "缺少或无效的 O3 日最大1小时平均浓度；完整日报需要七项有效指标。": 9,
+      "PM10 浓度超过 HJ 633—2012 表1最高断点；不外推或擅自封顶AQI。": 171,
+      "日报指标缺失或无效：PM10、NO2；不以缺项浓度计算完整AQI。": 6,
+      "日报指标缺失或无效：PM2.5、PM10；不以缺项浓度计算完整AQI。": 11,
+      "日报指标缺失或无效：SO2、CO、O3_8h；不以缺项浓度计算完整AQI。": 2,
+      "日报指标缺失或无效：SO2；不以缺项浓度计算完整AQI。": 10,
+      "PM2.5 浓度超过 HJ 633—2012 表1最高断点；不外推或擅自封顶AQI。": 8,
+      "日报指标缺失或无效：NO2；不以缺项浓度计算完整AQI。": 8,
+      "日报指标缺失或无效：PM10、O3_8h；不以缺项浓度计算完整AQI。": 38,
+      "日报指标缺失或无效：CO、O3_8h；不以缺项浓度计算完整AQI。": 4,
+      "日报指标缺失或无效：NO2、CO；不以缺项浓度计算完整AQI。": 3,
+      "日报指标缺失或无效：NO2、CO、O3_8h；不以缺项浓度计算完整AQI。": 2,
+      "日报指标缺失或无效：PM2.5、PM10、NO2；不以缺项浓度计算完整AQI。": 1,
+      "日报指标缺失或无效：PM10、CO、O3_8h；不以缺项浓度计算完整AQI。": 3,
+      "日报指标缺失或无效：NO2、O3_8h；不以缺项浓度计算完整AQI。": 3,
+      "日报指标缺失或无效：PM10、NO2、O3_8h；不以缺项浓度计算完整AQI。": 1,
+      "日报指标缺失或无效：PM10、NO2、CO；不以缺项浓度计算完整AQI。": 1,
+      "日报指标缺失或无效：PM2.5、CO；不以缺项浓度计算完整AQI。": 1,
+      "日报指标缺失或无效：PM10、SO2；不以缺项浓度计算完整AQI。": 2,
+      "日报指标缺失或无效：SO2、CO；不以缺项浓度计算完整AQI。": 3,
+      "日报指标缺失或无效：PM2.5、PM10、SO2、CO；不以缺项浓度计算完整AQI。": 1
+    },
+    "valid_days_by_pollutant": {
+      "PM2.5": 123310,
+      "PM10": 121691,
+      "SO2": 123329,
+      "NO2": 123332,
+      "CO": 123077,
+      "O3_8h": 122990,
+      "O3_1h": 123305
+    },
+    "invalid_hours_by_pollutant": {
+      "PM2.5": 1862,
+      "PM10": 3481,
+      "SO2": 1843,
+      "NO2": 1840,
+      "CO": 2095,
+      "O3_1h": 1867
+    },
+    "invalid_o3_days": 2182,
+    "o3_over_limit_exception_days": 105
+  },
+  "warnings": [
+    "排除33个全年六项污染物均无有效日报值的源地区列，详见statistics.excluded_all_year_empty_cities。",
+    "有4313行因日报指标缺失或超出AQI断点未派生AQI，具体原因见aqi_reason和统计项。"
+  ]
+}
