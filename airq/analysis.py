@@ -374,5 +374,5 @@ def analyze(root: Path, plan: dict) -> dict:
                     "seasonal": _seasonal, "anomaly": _anomaly}
         handlers[intent](connection, where, parameters, options, pollutant, column, result)
         if selected["valid_days"]:
-            result["insight"] += " 用连续监测识别重点区域与时段，为精准治污与美丽中国建设提供数据支撑。"
+            result["insight"] += " 以数据支持精准治污，践行‘绿水青山就是金山银山’，让青年运用大数据与AI服务美丽中国建设。"
     return result
